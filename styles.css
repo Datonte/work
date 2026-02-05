@@ -45,6 +45,8 @@ header {
 .mcd-logo-img {
     height: 40px;
     width: auto;
+    transform: rotate(180deg) !important;
+    display: inline-block;
 }
 
 nav ul {
