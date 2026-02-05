@@ -17,6 +17,8 @@ body {
     padding: 0;
     color: var(--mcd-black);
     background-color: white;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 /* Header */
@@ -54,12 +56,16 @@ nav ul {
     display: flex;
     gap: 20px;
     align-items: center;
+    margin: 0;
+    padding: 0;
 }
 
 nav a {
     text-decoration: none;
     color: var(--mcd-black);
     font-weight: 500;
+    display: inline-block;
+    transition: color 0.2s;
 }
 
 .nav-btn {
@@ -150,6 +156,9 @@ nav a {
     margin: 0;
     padding: 0;
     flex-shrink: 0;
+    user-select: none;
+    -webkit-user-select: none;
+    pointer-events: none;
 }
 
 @keyframes scroll {
@@ -305,63 +314,136 @@ footer {
 }
 
 /* Mobile Responsiveness */
+
+/* Large Tablets and Small Desktops (769px - 1024px) */
+@media (max-width: 1024px) {
+    .job-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 15px;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .jobs-section {
+        padding: 0 1.5rem;
+    }
+}
+
+/* Tablets (481px - 768px) */
 @media (max-width: 768px) {
+    html {
+        scroll-padding-top: 120px;
+    }
 
     /* Header */
     header {
         flex-direction: column;
         gap: 15px;
         padding: 1rem;
-        position: relative;
+        position: sticky;
+        top: 0;
     }
 
     .logo-container {
         width: 100%;
         justify-content: center;
+        font-size: 1.1rem;
+    }
+
+    .mcd-logo-img {
+        height: 35px;
     }
 
     nav {
         width: 100%;
         overflow-x: auto;
         padding-bottom: 5px;
+        -webkit-overflow-scrolling: touch;
     }
 
     nav ul {
         width: max-content;
         padding: 0;
-        gap: 10px;
+        gap: 12px;
+        min-width: 100%;
+        justify-content: flex-start;
+    }
+
+    nav a {
+        font-size: 0.9rem;
     }
 
     .nav-btn,
     .ca-box {
-        font-size: 0.8rem;
-        padding: 6px 10px;
+        font-size: 0.75rem;
+        padding: 6px 12px;
         white-space: nowrap;
+    }
+
+    .ca-box {
+        font-size: 0.7rem;
+        padding: 5px 10px;
+    }
+
+    .ca-box span {
+        font-size: 0.65rem;
+        word-break: break-all;
+        max-width: 120px;
+    }
+
+    .copy-btn {
+        font-size: 0.7rem;
+        padding: 3px 6px;
     }
 
     /* Hero */
     .hero {
         padding: 2rem 1rem;
-        min-height: 400px;
+        min-height: 350px;
+    }
+
+    .carousel-track {
+        animation-duration: 30s;
+    }
+
+    .carousel-track img {
+        min-width: 200px;
     }
 
     .hero-content {
         padding: 1.5rem;
         width: 95%;
+        max-width: 100%;
     }
 
     .hero h1 {
         font-size: 2rem;
+        line-height: 1.2;
+    }
+
+    .hero p {
+        font-size: 0.95rem;
     }
 
     /* Search */
     .search-container {
         flex-direction: column;
         margin: 1rem 0;
+        padding: 15px;
+        gap: 10px;
+    }
+
+    .search-container input {
+        width: 100%;
+        padding: 12px;
+        font-size: 0.95rem;
     }
 
     .search-btn {
         width: 100%;
+        padding: 12px;
     }
 
     /* Job Grid */
@@ -370,17 +452,241 @@ footer {
         margin: 2rem auto;
     }
 
+    .section-title {
+        font-size: 1.75rem;
+        margin-bottom: 1.5rem;
+    }
+
     .job-grid {
         grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .job-card {
+        padding: 18px;
+    }
+
+    .job-title {
+        font-size: 1.15rem;
+    }
+
+    .job-location {
+        font-size: 0.9rem;
     }
 
     /* Footer */
+    footer {
+        padding: 2rem 1rem;
+    }
+
     .footer-links {
         flex-direction: column;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .footer-links a {
+        font-size: 0.85rem;
+    }
+}
+
+/* Small Phones (320px - 480px) */
+@media (max-width: 480px) {
+    html {
+        scroll-padding-top: 140px;
+    }
+
+    /* Header */
+    header {
+        padding: 0.75rem;
         gap: 10px;
     }
 
-    html {
-        scroll-padding-top: 180px;
+    .logo-container {
+        font-size: 1rem;
+    }
+
+    .mcd-logo-img {
+        height: 30px;
+    }
+
+    nav ul {
+        gap: 8px;
+        font-size: 0.85rem;
+    }
+
+    nav a {
+        font-size: 0.8rem;
+    }
+
+    .nav-btn {
+        font-size: 0.7rem;
+        padding: 5px 10px;
+    }
+
+    .ca-box {
+        font-size: 0.65rem;
+        padding: 4px 8px;
+        flex-wrap: wrap;
+        max-width: 100%;
+    }
+
+    .ca-box span {
+        font-size: 0.6rem;
+        max-width: 100px;
+        display: inline-block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .copy-btn {
+        font-size: 0.65rem;
+        padding: 3px 6px;
+    }
+
+    /* Hero */
+    .hero {
+        padding: 1.5rem 0.75rem;
+        min-height: 300px;
+    }
+
+    .carousel-track {
+        animation-duration: 25s;
+    }
+
+    .carousel-track img {
+        min-width: 150px;
+    }
+
+    .hero-content {
+        padding: 1.25rem;
+        width: 98%;
+    }
+
+    .hero h1 {
+        font-size: 1.5rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .hero p {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+
+    /* Search */
+    .search-container {
+        padding: 12px;
+        margin: 0.75rem 0;
+    }
+
+    .search-container input {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    .search-btn {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    /* Job Sections */
+    .jobs-section {
+        padding: 0 0.75rem;
+        margin: 1.5rem auto;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .job-grid {
+        gap: 12px;
+    }
+
+    .job-card {
+        padding: 15px;
+    }
+
+    .job-title {
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+    }
+
+    .job-location {
+        font-size: 0.85rem;
+        margin-bottom: 12px;
+    }
+
+    .job-card p {
+        font-size: 0.9rem;
+        margin-bottom: 12px;
+    }
+
+    .apply-btn {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    /* Footer */
+    footer {
+        padding: 1.5rem 0.75rem;
+    }
+
+    .footer-links {
+        gap: 10px;
+    }
+
+    .footer-links a {
+        font-size: 0.8rem;
+    }
+
+    footer p {
+        font-size: 0.85rem;
+    }
+}
+
+/* Extra Small Phones (max-width: 320px) */
+@media (max-width: 320px) {
+    .hero h1 {
+        font-size: 1.25rem;
+    }
+
+    .section-title {
+        font-size: 1.25rem;
+    }
+
+    .ca-box span {
+        max-width: 80px;
+    }
+}
+
+/* Landscape Orientation for Mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    .hero {
+        min-height: 250px;
+    }
+
+    .hero-content {
+        padding: 1rem;
+    }
+
+    .hero h1 {
+        font-size: 1.75rem;
+    }
+}
+
+/* Touch Device Improvements */
+@media (hover: none) and (pointer: coarse) {
+    .apply-btn,
+    .search-btn,
+    .copy-btn,
+    .nav-btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    nav a {
+        padding: 8px 4px;
     }
 }
